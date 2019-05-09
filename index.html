@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Callbacks and Promises</title>
+    <style>
+        body {
+            background: #000;
+            color: gray!important;
+        }
+    </style>
+</head>
+<body>
+    <h2>
+        Todo:
+    </h2>
+    <ul>
+        <li>Figure out what my async code will do</li>
+        <ol>
+            <li>
+                Get woeid from the city data
+            </li>
+            <li>
+                Using the woeid, get today's weather_state_name
+            </li>
+            <li>
+                Using the woeid, get tomorrow's weather_state_name
+            </li>
+        </ol>
+        <li>Demonstrate it with 
+            <ul>
+                <li>setTimeout()</li>
+                <li>callback hell</li>
+                <li>jQuery promises</li>
+                <li>ES6 promises</li>
+                <li>async/await</li>
+            </ul>
+        </li>
+    </ul>
+    <h3>Callback</h3>
+    <ul>
+        <li>
+            Functions that run after certain code has finished.
+        </li>
+    </ul>
+    <h3>Promise</h3>
+    <ul>
+        <li>
+            Object that keeps track of whether a certain async event has happened or not
+        </li>
+        <li>
+            Determines what to do after event happens
+        </li>
+        <li>
+            Tells code to expect a future vaule (e.g. data coming back from server)
+        </li>
+        <h4>Promise Steps</h4>
+        <ol>
+            <li>
+                Promise object is created (and stored in a var). Promise obj watches for a value to be returned in the future. (In the meantime, the next lines of code are run)
+            </li>
+            <li>
+                Data is received (promise is resolved), OR not received (promise is rejected).
+            </li>
+            <li>
+                Programmer tells code what to do after resolution/rejection by calling .then() on the promise object.
+            </li>
+            <li>
+                If another chunk of code needs to be run after the first promise is resolved, another promise can be chained to the previous one by creating a new promise object in the .then() from previous step. The .then() for the new promise should be appended (chained) to the end of the previous .then() to avoid a callback hell type pattern.
+            </li>
+        </ol>
+    </ul>
+</body>
+</html>
