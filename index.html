@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Callbacks and Promises</title>
-    <style>
-        body {
-            background: #000;
-            color: gray!important;
-        }
-    </style>
+    <title>Asynchronous JavaScript</title>
 </head>
 <body>
-    <h2>
-        Todo:
-    </h2>
+    <!-- TODO
+        Demonstrate async with 
+            - setTimeout()
+            - callback hell
+            - jQuery deferred
+            - jQuery promises
+            - ES6 promises
+            - async/await
+            - .done() can be used w/o ajax (e.g. for animations)
+            - https://stackoverflow.com/questions/19359763/done-after-animate-callback-function -->
+
+    <h1 style="text-align: center">Asynchronous JavaScript</h1>
+    <h3>What is "asynchronous" JavaScript?</h3>
     <ul>
-        <li>Figure out what my async code will do</li>
-        <ol>
-            <li>
-                Get woeid from the city data
-            </li>
-            <li>
-                Using the woeid, get today's weather_state_name
-            </li>
-            <li>
-                Using the woeid, get tomorrow's weather_state_name
-            </li>
-        </ol>
-        <li>Demonstrate it with 
-            <ul>
-                <li>setTimeout()</li>
-                <li>callback hell</li>
-                <li>jQuery promises</li>
-                <li>ES6 promises</li>
-                <li>async/await</li>
-            </ul>
+        <li>
+            Code that doesn't have to finish running in the order for the next line to run. This allows the async portions to not block the code after it.
+        </li>
+    </ul>
+    <h3>setTimeout()</h3>
+    <ul>
+        <li>
+            Simple to create
+        </li>
+        <li>
+            Runs a function after the amount of time specified by the programmer.
         </li>
     </ul>
     <h3>Callback</h3>
     <ul>
         <li>
-            Functions that run after certain code has finished.
+            A function that runs after another function finishes.
+        </li>
+        <li>
+            Some JS and JQ functions that have a duration greater than zero take a callback as a parameter. (e.g. setTimeout(), or animate())
         </li>
     </ul>
     <h3>Promise</h3>
@@ -53,27 +51,50 @@
         <li>
             Tells code to expect a future vaule (e.g. data coming back from server)
         </li>
-        <h4>Promise Steps</h4>
+        <h4>Steps</h4>
         <ol>
             <li>
-                Promise object is created (and stored in a var). Promise obj watches for a value to be returned in the future. (In the meantime, the next lines of code are run)
+                Pending: Promise object (which is stored in a var) watches for an event to occur (i.e. data to be returned). In the meantime, the next lines of code are run.
             </li>
             <li>
-                Data is received (promise is resolved), OR not received (promise is rejected).
+                Resolved: The event the promise was waiting for has happened. If the promise was successful (e.g. data was returned), the promise is fulfilled, and .resolve will be run. If the promise was rejected (e.g. no data returned), .reject() will run. 
             </li>
             <li>
-                Programmer tells code what to do after resolution/rejection by calling .then() on the promise object.
+                Consume the promise: Use .then() or .catch() to specify what to do after promise resolves on the promise object.
             </li>
             <li>
-                If another chunk of code needs to be run after the first promise is resolved, another promise can be chained to the previous one by creating a new promise object in the .then() from previous step. The .then() for the new promise should be appended (chained) to the end of the previous .then() to avoid a callback hell type pattern.
+                .then() methods can be chained to control the order async function execution.
             </li>
         </ol>
+    </ul>
+    <h3>Demos</h3>
+    <ul>
+        <li>
+            <a href="demo.html" target="_blank">Demo page</a>
+        </li>
     </ul>
     <h3>References</h3>
     <ul>
         <li>
-            https://www.youtube.com/watch?v=ay_qbDuIHNk
+            <a href="https://www.pluralsight.com/guides/introduction-to-asynchronous-javascript" target="_blank">Introduction to Asynchronous JavaScript</a>
         </li>
+        <li>
+            <a href="https://cors-anywhere.herokuapp.com/" target="blank">An API to allow CORS for any site</a>
+        </li>
+        <li>
+            <a href="https://www.metaweather.com/api/" target="_blank">metaweather API doc</a>
+        </li>
+
+        <!-- <li>
+            <a href="https://corsproxy.github.io/">Another CORS proxy</a>
+        </li> -->
+
+        <!-- <li>
+            <a href="https://youtu.be/ay_qbDuIHNk" target="_blank">jQuery Deferred video</a> (not covered in this lesson)
+        </li>
+        <li>
+            <a href="https://stackoverflow.com/questions/17308172/deferred-versus-promise" target="_blank">Deferred vs Promise</a>
+        </li> -->
     </ul>
 </body>
 </html>
