@@ -103,6 +103,10 @@ function citySearchES6Promises(chosenCity) {
             success: function(data) {
                 console.log(data);
                 resolve(data);
+            },
+            error: function(error) {
+                console.log(error);
+                reject(error);
             }
         })
     });
@@ -140,10 +144,27 @@ function citySearchES6Promises(chosenCity) {
         console.log(thisCityID);
         return getTodaysWeather(thisCityID);
     })
+    .catch(function(error) {
+        console.log(error);
+    })
     .then(function(result) {
         console.log(`Today's weather: ${result}`);
         return getTomorrowsWeather(thisCityID)
     }).then(function(result) {
         console.log(`Tomorrow's weather: ${result}`);
     })
+
+
+
+
+    // getCityID
+    // .then(function(result) {
+    //     thisCityID = result[0].woeid;
+    //     console.log(thisCityID);
+    // })
+    // .catch(function(error) {
+    //     console.log(error);
+    // })
+
+    // console.log(await getCityID());
 }
