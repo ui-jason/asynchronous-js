@@ -97,15 +97,16 @@ function citySearchCallbacks(chosenCity) {
 function citySearchES6Promises(chosenCity) {
     // PROMISE OBJECTS
 
+    // Promise object takes anonymouse executor function that always takes resolve and reject as arguments). The executor function is executed when the promise object is created.
     var getCityID = new Promise(function(resolve, reject) {
         $.ajax({
             url: 'https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=' + chosenCity,
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 resolve(data);
             },
             error: function(error) {
-                console.log(error);
+                // console.log(error);
                 reject(error);
             }
         })
@@ -145,6 +146,7 @@ function citySearchES6Promises(chosenCity) {
         return getTodaysWeather(thisCityID);
     })
     .catch(function(error) {
+        console.log('Error: City not found.');
         console.log(error);
     })
     .then(function(result) {

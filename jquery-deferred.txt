@@ -1,0 +1,72 @@
+///////////////////////////
+// jQ deferred:
+///////////////////////////
+
+socialNetwork/createFacebookEvent.jsp
+
+1. Line 516
+User connects to FB
+
+
+2. Line 529
+getUserName().then(fbGraphAPI).then(checkFacebookEventOnEtix); 
+
+This is where 3 Deferred objects are consumed. It is higher in the code where the actual Deferred objects are created, but it could have been the other way around.
+
+
+3. Line 749
+
+getUserName() creates a new Deferred obj called deferMe, then gets the userId using the Graph API, then resolves (so it can be chained with then()), then returns deferMe.
+
+
+4. Line 529
+
+The chained .then(fbGraphAPI) runs. This must run after getUserName() because the FB userId obtained from the previous deferred object is needed in fbGraphAPI() (the ID is used to retrieve the FB user's profile pic). 
+
+Also, fbGraphAPI() contains 4 of its own deferred objects (stored in vars called deferred, deferAccounts, deferPicture, and deferEventExists)
+
+
+5. Line 767
+
+fbGraphAPI() makes 3 API calls:
+
+5a. Line 779
+
+A (conditional) call to see if a FB event exists in Etix but doesn't exist on FB (meaning the event was deleted in FB, but hasn't yet been deleted in Etix). When the callback for this API request completes, deferEventExists resolves.
+
+5b. Line 793
+
+A call to obtain a FB profile picture from the user's account. When the callback for this API request completes,
+deferPicture resolves.
+
+5c. Line 809
+
+A call to check whether the current FB user can admin the FB page that they are attempting to publish to. When the callback for this API request completes, deferAccounts resolves.
+
+
+6. Line 837
+
+.when() waits for it's arguments to be resolved (in any order). The .done() chained to .when() gives us the ability to add a callback. .done() is similar to .then(), but .done() will only run if a promise is resolved. However, .then() can run if a promise is resolved, rejected, or still in progress (to give progress updates I guess, but I haven't used this).
+
+The .done() resolves the Deferred objecet named "deferred", and after this, fbGraphAPI() returns the "deferred" object.
+
+7. Line 529
+
+The chained .then(checkFacebookEventOnEtix) runs. 
+
+Line 878
+
+checkFacebookEventOnEtix() displays different elements on the page depending on whether an event exists in the Etix DB, exists on FB, or was published to FB.
+
+The end (yay).
+
+
+
+
+TODO: 
+- .promise() method inside the Deferred object (and why you would use .promise() and not .resolve())
+"A promise is just a deferred object that does not have functions to change its state."
+c.f. 
+https://maori.geek.nz/jquery-promises-and-deferreds-i-promise-this-will-be-short-d10275f82717?gi=a7e24ab6ae75
+
+- passing arguments into .resolve() / .reject()

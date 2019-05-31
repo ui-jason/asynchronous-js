@@ -5,10 +5,27 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
         <script src="demo.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+     crossorigin="anonymous">
+        <style>
+            body {
+                margin: 20px;
+            }
+            
+            .form-control {
+                display: inline-block;
+                width: auto;
+            }
+        </style>
     </head>
     <body>
         <h1>Weather for today and tomorrow</h1>
-        <input type="text" placeholder="city" class="city"/>
-        <input type="submit">
+        <div class="form-group">
+            <input type="text" placeholder="city" class="city form-control"/>
+            <input type="submit" class="btn btn-primary">
+        </div>
+        <div id="results">
+            
+        </div>
     </body>
 </html>
